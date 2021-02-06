@@ -1,0 +1,20 @@
+./darknet detector test data/obj.data cfg/yolov4-custom-id.cfg backup/yolov4-custom-id_last.weights
+
+./darknet detector map data/obj.data cfg/yolov4-custom-id.cfg backup/yolov4-custom-id_last.weights -iou_thresh 0.75
+
+./darknet detector recall  data/obj.data cfg/yolov4-custom-id.cfg backup/yolov4-custom-id_last.weights
+
+./darknet detector calc_anchors data/obj.data --num_of_clusters 9 -width 416 -height 416
+
+./darknet detector train data/obj.data cfg/yolov4-custom-id-classify.cfg backup/yolov4-custom-id-classify_last.weights  -dont_show -map > yolov4_id_class.log
+
+
+./darknet detector train data/obj.data cfg/yolov4-custom-id-classify.cfg backup/yolov4-custom-id-classify_last.weights  -dont_show -mjpeg_port 8090 -map > yolov4_id_class.log
+
+
+./darknet detector train data/info_id.data data/info-id-yolov4.cfg /media/thiennt/Data/training/yolo/backup/info_id/yolov4-custom-id-detect_info_last.weights  -dont_show -mjpeg_port 8090 -map > info_id_yolov4.txt
+
+
+watch -n 0.5 nvidia-smi
+
+
