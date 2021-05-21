@@ -1,4 +1,4 @@
-import data_utils as utils
+from anpr_project import data_utils as utils
 import cv2
 import numpy as np
 
